@@ -1,7 +1,6 @@
 {
   "name": "note-taker",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +8,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
-  }
+    "express": "^4.17.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SGiel/note-taker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SGiel/note-taker/issues"
+  },
+  "homepage": "https://github.com/SGiel/note-taker#readme",
+  "description": ""
 }
