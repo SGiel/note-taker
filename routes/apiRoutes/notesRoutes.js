@@ -5,6 +5,8 @@ const {notes} = require('../../db/db.json');
 const fs = require("fs");
 const path = require("path");
 
+const { nanoid } = require('nanoid');
+
 function filterByQuery(query, notesArray) {
     let filteredResults = notesArray;
 
@@ -29,6 +31,14 @@ function createNewNote(body, notesArray) {
     );
     return note;
 }
+
+function writeOverNotes(notesArray) {
+    fs.writeFileSync(
+        path.join(__dirname, '../../db/db.json'),
+        JSON.stringify({ notes: notesArray }, null, 2)
+      );
+  };
+
 
 function validateNote(note) {
     if (!note.title || typeof note.title !== 'string') {
@@ -55,9 +65,8 @@ router.get('/notes/:id', (req, res) => {
 });
 
 router.post('/notes', (req, res) => {
-  // set id based on what the next index of the array will be
-  
-  req.body.id = notes.length.toString();
+  // set id with nanoid()
+  req.body.id = nanoid();
 
   if (!validateNote(req.body)) {
     res.status(400).send('The animal is not properly formatted.');
@@ -65,6 +74,20 @@ router.post('/notes', (req, res) => {
     const note = createNewNote(req.body, notes);
     res.json(note);
   }
+});
+
+router.delete('/notes/:id', (req, res) => {
+    const result = notes;
+    console.log("req.params.id", req.params.id);
+    if (req.params.id) {
+        for (i = 0; i < result.length; i++) {
+            if (result[i].id == req.params.id) {
+                result.splice(i, 1);
+            }
+        }
+    } 
+    writeOverNotes(result);
+    res.json(result);
 });
 
 module.exports  = router;
