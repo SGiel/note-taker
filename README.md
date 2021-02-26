@@ -14,9 +14,9 @@ GitHub repository URL: [github.com/SGiel/note-taker](https://github.com/SGiel/no
  
   ## Screenshots of web application 
 
-![Screenshot of Note-Taker initial screen](./public/images/landing-page-screenshot.png)
+![Screenshot of Note-Taker initial screen](./public/assets/images/landing-page-screenshot.png)
 
-![Screenshot of Note-Taker on notes screen](./public/images/notes-page-screenshot.png)
+![Screenshot of Note-Taker on notes screen](./public/assets/images/notes-page-screenshot.png)
 
 
 ## Installation
