@@ -16,10 +16,12 @@ app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
 app.use(express.json());
 
+// important that static files come before routes
+app.use(express.static('public'));
+
 app.use('/api', apiRoutes);
 app.use('/', htmlRoutes);
 
-app.use(express.static('public'));
 
 app.listen(PORT, () => {
     console.log(`API server now on port http://localhost:${PORT}`);

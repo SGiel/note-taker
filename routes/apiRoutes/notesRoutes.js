@@ -24,6 +24,8 @@ function findById(id, notesArray) {
 
 function createNewNote(body, notesArray) {
     const note = body;
+    // set id on new note with nanoid()
+    note.id = nanoid();
     notesArray.push(note);
     fs.writeFileSync(
       path.join(__dirname, '../../db/db.json'),
@@ -65,11 +67,9 @@ router.get('/notes/:id', (req, res) => {
 });
 
 router.post('/notes', (req, res) => {
-  // set id with nanoid()
-  req.body.id = nanoid();
 
   if (!validateNote(req.body)) {
-    res.status(400).send('The animal is not properly formatted.');
+    res.status(400).send('The note is not properly formatted.');
   } else {
     const note = createNewNote(req.body, notes);
     res.json(note);
@@ -78,7 +78,6 @@ router.post('/notes', (req, res) => {
 
 router.delete('/notes/:id', (req, res) => {
     const result = notes;
-    console.log("req.params.id", req.params.id);
     if (req.params.id) {
         for (i = 0; i < result.length; i++) {
             if (result[i].id == req.params.id) {
