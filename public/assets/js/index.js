@@ -54,11 +54,13 @@ const renderActiveNote = () => {
   hide(saveNoteBtn);
 
   if (activeNote.id) {
-    // noteTitle.setAttribute('readonly', true);
-    // noteText.setAttribute('readonly', true);
+    noteTitle.setAttribute('readonly', true);
+    noteText.setAttribute('readonly', true);
     noteTitle.value = activeNote.title;
     noteText.value = activeNote.text;
   } else {
+    noteTitle.removeAttribute('readonly');
+    noteText.removeAttribute('readonly');
     noteTitle.value = '';
     noteText.value = '';
   }
@@ -107,7 +109,7 @@ const handleNewNoteView = (e) => {
 };
 
 const handleRenderSaveBtn = () => {
-  if (!noteTitle.value.trim() || !noteText.value.trim()) {
+  if (!noteTitle.value.trim() || !noteText.value.trim() || noteText.hasAttribute('readonly')) {
     hide(saveNoteBtn);
   } else {
     show(saveNoteBtn);
